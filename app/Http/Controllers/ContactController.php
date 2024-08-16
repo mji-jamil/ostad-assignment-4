@@ -9,8 +9,21 @@ class ContactController extends Controller
 {
     public function index(Request $request)
     {
-        $contacts = Contact::all();
-        return view('contacts.index', compact('contacts'));
+//        $contacts = Contact::all();
+//        return view('contacts.index', compact('contacts'));
+        $search = $request->input('search');
+        $sortField = $request->input('sort', 'name');
+        $sortDirection = $request->input('direction', 'asc');
+
+        $contacts = Contact::query()
+            ->when($search, function($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            })
+            ->orderBy($sortField, $sortDirection)
+            ->get();
+
+        return view('contacts.index', compact('contacts', 'search', 'sortField', 'sortDirection'));
     }
 
     public function create()
