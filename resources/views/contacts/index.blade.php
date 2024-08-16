@@ -9,13 +9,11 @@
         </div>
     @endif
 
-    <!-- Action Buttons -->
     <div class="mb-3">
         <a href="{{ route('contacts.create') }}" class="btn btn-primary">Create New Contact</a>
         <a href="{{ route('contacts.index') }}" class="btn btn-secondary ml-2">Show All Contacts</a>
     </div>
 
-    <!-- Search Form -->
     <form method="GET" action="{{ route('contacts.index') }}" class="form-inline mb-3">
         <input type="text" name="search" class="form-control mr-2" placeholder="Search by name or email" value="{{ request('search') }}">
         <button type="submit" class="btn btn-secondary">Search</button>

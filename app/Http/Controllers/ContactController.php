@@ -9,8 +9,6 @@ class ContactController extends Controller
 {
     public function index(Request $request)
     {
-//        $contacts = Contact::all();
-//        return view('contacts.index', compact('contacts'));
         $search = $request->input('search');
         $sortField = $request->input('sort', 'name');
         $sortDirection = $request->input('direction', 'asc');
